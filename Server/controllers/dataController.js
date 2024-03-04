@@ -38,10 +38,10 @@ export const getSpecificData = async(req,res)=>{
         if (topics) filter.topic = topics;
         if (region) filter.region = region;
         if (city) filter.city = city;
-    
-        // Query MongoDB using your Mongoose model
+
         const data = await jsondata.find(filter);
-    
+        
+        console.log(data.length)
         res.status(200).json({
             success: true,
             message: "Successful ",
@@ -55,3 +55,25 @@ export const getSpecificData = async(req,res)=>{
         });
     }
 }
+
+
+export const mostRelevance = async(req,res)=>{
+    try {
+        
+        const getdata = await jsondata.find(
+            { relevance:{ $gt:3 } }
+        )
+        
+        console.log(getdata.length)
+        res.status(200).json({
+            success: true,
+            message: "Successful ",
+            data: getdata,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        });
+    }
+};
