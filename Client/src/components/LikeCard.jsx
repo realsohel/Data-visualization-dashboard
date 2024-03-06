@@ -2,7 +2,7 @@ import React from 'react'
 
 const LikeCard = ({dumpdata}) => {
     return (
-            <div className="liked-card    ">
+            <div className="liked-card ">
                 <h1 className='primaryText'>
                     {dumpdata.title.length>40?`${dumpdata.title.slice(0,40)}...`:dumpdata.title}
                 </h1>

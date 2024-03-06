@@ -16,3 +16,14 @@ export const getMostLiked = async(req,res)=>{
         console.log(error)
     }
 }
+
+export const getdata = async (query)=>{
+    try {
+        const data = await api.get(`/getspecificdata${query}`,{
+            timeout:10*1000
+        })
+        return data.data.data;
+    } catch (error) {
+        console.log(error)
+    }
+}

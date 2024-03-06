@@ -2,27 +2,110 @@ import React from 'react'
 import { FaStar } from "react-icons/fa";
 import { MdDataObject } from "react-icons/md";
 import {Link} from 'react-router-dom'
-import LinePlot from './day3';
+import VisualCard from './VisualCard';
+import LineChart2 from '../charts/LineChart2';
 const Dashboard = () => {
-    const data = [{
-        "end_year": "",
-        "intensity": 4,
-        "sector": "Energy",
-        "topic": "gas",
-        "insight": "OGA Overview 2016",
-        "url": "https://www.ogauthority.co.uk/media/2825/oga-overview-october-2016.pdf",
-        "region": "Northern Europe",
-        "start_year": "",
-        "impact": "",
-        "added": "October, 23 2016 04:55:41",
-        "published": "October, 14 2016 00:00:00",
-        "country": "United Kingdom",
-        "relevance": 2,
-        "pestle": "Industries",
-        "source": "ogauthority",
-        "title": "The sustained decline in global oil and gas prices has brought into sharp focus the significant risks facing the mature UK offshore oil and gas industry.",
-        "likelihood": 2
-    }]
+
+
+    const data = [
+        {
+            "end_year": "",
+            "intensity": 4,
+            "sector": "Energy",
+            "topic": "gas",
+            "insight": "OGA Overview 2016",
+            "url": "https://www.ogauthority.co.uk/media/2825/oga-overview-october-2016.pdf",
+            "region": "Northern Europe",
+            "start_year": "",
+            "impact": "",
+            "added": "October, 23 2016 04:55:41",
+            "published": "October, 14 2016 00:00:00",
+            "country": "India",
+            "relevance": 2,
+            "pestle": "Industries",
+            "source": "ogauthority",
+            "title": "The sustained decline in global oil and gas prices has brought into sharp focus the significant risks facing the mature UK offshore oil and gas industry.",
+            "likelihood": 4
+        },
+        {
+            "end_year": "",
+            "intensity": 4,
+            "sector": "Energy",
+            "topic": "gas",
+            "insight": "OGA Overview 2016",
+            "url": "https://www.ogauthority.co.uk/media/2825/oga-overview-october-2016.pdf",
+            "region": "Northern Europe",
+            "start_year": "",
+            "impact": "",
+            "added": "October, 23 2016 04:55:41",
+            "published": "October, 14 2016 00:00:00",
+            "country": "United Kingdom",
+            "relevance": 2,
+            "pestle": "Industries",
+            "source": "ogauthority",
+            "title": "The sustained decline in global oil and gas prices has brought into sharp focus the significant risks facing the mature UK offshore oil and gas industry.",
+            "likelihood": 5
+        },
+        {
+            "end_year": "",
+            "intensity": 4,
+            "sector": "Energy",
+            "topic": "gas",
+            "insight": "OGA Overview 2016",
+            "url": "https://www.ogauthority.co.uk/media/2825/oga-overview-october-2016.pdf",
+            "region": "Northern Europe",
+            "start_year": "",
+            "impact": "",
+            "added": "October, 23 2016 04:55:41",
+            "published": "October, 14 2016 00:00:00",
+            "country": "United amera",
+            "relevance": 2,
+            "pestle": "Industries",
+            "source": "ogauthority",
+            "title": "The sustained decline in global oil and gas prices has brought into sharp focus the significant risks facing the mature UK offshore oil and gas industry.",
+            "likelihood": 1
+        },
+        {
+            "end_year": "",
+            "intensity": 4,
+            "sector": "Energy",
+            "topic": "gas",
+            "insight": "OGA Overview 2016",
+            "url": "https://www.ogauthority.co.uk/media/2825/oga-overview-october-2016.pdf",
+            "region": "Northern Europe",
+            "start_year": "",
+            "impact": "",
+            "added": "October, 23 2016 04:55:41",
+            "published": "October, 14 2016 00:00:00",
+            "country": "autralia",
+            "relevance": 2,
+            "pestle": "Industries",
+            "source": "ogauthority",
+            "title": "The sustained decline in global oil and gas prices has brought into sharp focus the significant risks facing the mature UK offshore oil and gas industry.",
+            "likelihood": 2
+        },
+        {
+            "end_year": "",
+            "intensity": 4,
+            "sector": "Energy",
+            "topic": "gas",
+            "insight": "OGA Overview 2016",
+            "url": "https://www.ogauthority.co.uk/media/2825/oga-overview-october-2016.pdf",
+            "region": "Northern Europe",
+            "start_year": "",
+            "impact": "",
+            "added": "October, 23 2016 04:55:41",
+            "published": "October, 14 2016 00:00:00",
+            "country": "nunupur",
+            "relevance": 2,
+            "pestle": "Industries",
+            "source": "ogauthority",
+            "title": "The sustained decline in global oil and gas prices has brought into sharp focus the significant risks facing the mature UK offshore oil and gas industry.",
+            "likelihood": 3
+        },
+]
+
+
     return (
         <div className='m-4 w-[100%]'>
             <div className=' mt-4 flex justify-between'>
@@ -39,7 +122,7 @@ const Dashboard = () => {
             </div>
 
             <div className="flex  my-6 space-x-16">
-                <div className="card border-2  w-60 p-2 mx-2 my-4  rounded-md bg-white flex flex-col space-y-2 shadow-md hover:shadow-lg hover:cursor-pointer">
+                <div className="mode card border-2  w-60 p-2 mx-2 my-4  rounded-md bg-white flex flex-col space-y-2 shadow-md hover:shadow-[rgb(129 140 248 /1)] hover:cursor-pointer">
                     <div className="flex justify-between">
                         <span className=' text-lg text-blue-400  font-semibold '>Most Liked data</span>
                         <span className='my-auto '><FaStar color='Gold'/></span>
@@ -92,8 +175,13 @@ const Dashboard = () => {
                 </div>
             </div>
             
-            <LinePlot data={data}/>
+            <div className="flex">
+                <VisualCard data={data}/>
+            </div>
             
+            <div className='justify-center w-[50%] overflow-hidden'>
+                <LineChart2/>
+            </div>
         </div>
     )
 }

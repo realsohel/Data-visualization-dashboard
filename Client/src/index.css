@@ -53,7 +53,15 @@ body{
   cursor: pointer;
   transform: scale(1.1);
 }
+.mode {
+  transition: all 350ms ease-in;
+}
 
+
+.mode:hover {
+  scale: 1.1;
+  box-shadow: rgb(129 140 248 /1);
+}
 
 body::-webkit-scrollbar {
   display: none;
