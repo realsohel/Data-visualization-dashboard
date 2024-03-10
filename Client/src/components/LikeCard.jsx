@@ -7,16 +7,16 @@ const LikeCard = ({dumpdata}) => {
                     {dumpdata.title.length>40?`${dumpdata.title.slice(0,40)}...`:dumpdata.title}
                 </h1>
 
-                <div className='my-4 text-lg border-t'>
-                    <span className='font-semibold text-gray-400'>
+                <div className='my-4 text-md border-t'>
+                    <span className='font-medium text-gray-400'>
                     Insight : {""}
                     </span> 
                     <span className='secondaryText'>
                     {dumpdata.insight.length>25?`${dumpdata.insight.slice(0,25)}...`:dumpdata.insight}
                     </span>
                 </div>
-                <div className='mt-1 text-lg '>
-                    <span className='font-semibold text-gray-400'>
+                <div className='mt-1 text-md '>
+                    <span className='font-medium text-gray-400'>
                     Source : {""}
                     </span> 
                     <span className='secondaryText'>
@@ -24,9 +24,9 @@ const LikeCard = ({dumpdata}) => {
                     </span>
                 </div>
 
-                <div className='mt-1 text-lg  '>
+                <div className='mt-1 text-md '>
                     <div>
-                    <span className='font-semibold text-gray-400 '>
+                    <span className='font-medium text-gray-400 '>
                         Sector  : {""}
                         
                     </span> 
@@ -35,7 +35,7 @@ const LikeCard = ({dumpdata}) => {
                     </span>
                     </div>
                     <div>
-                    <span className='font-semibold text-gray-400 '>
+                    <span className='font-medium text-gray-400 '>
                         Pestle : {""}
                     </span> 
                     <span className='secondaryText'>
@@ -43,19 +43,19 @@ const LikeCard = ({dumpdata}) => {
                     </span>
                     </div>
 
-                    <div className='mt-1 text-lg '>
-                        <span className='font-semibold text-gray-400'>
-                            {dumpdata.likelihood ? "Likelihood : ":"Relevance : "}
+                    <div className='mt-1 text-md '>
+                        <span className='font-medium text-gray-400'>
+                            {"Relevance : "}
                         </span> 
                         <span className='secondaryText'>
-                        { dumpdata.likelihood ? dumpdata.likelihood :dumpdata.relevance}
+                        { dumpdata.relevance}
                         </span>
                     </div>
                 </div>
 
-                <div className='my-'>
+                <div className=''>
                     <a href={dumpdata.url} target='__blank' 
-                    className='bg-indigo-400 border rounded-md p-2 text-white font-medium float-right hover:shadow-md'>
+                    className='bg-indigo-400 border rounded-md p-2 text-white  float-right hover:shadow-md'>
                     Read more
                     </a>
                 </div>

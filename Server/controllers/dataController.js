@@ -48,35 +48,6 @@ const getRequiredFields = (query) => {
             reqFields[field] = 1;
     }
 
-    // const data = [{
-    //     "intensity": 6,
-    //     "sector": "Energy"
-    //   },
-    //   {
-    //     "intensity": 6,
-    //     "sector": "Environment"
-    //   },
-    //   {
-    //     "intensity": 6,
-    //     "sector": ""
-    //   },
-    //   {
-    //     "intensity": 6,
-    //     "sector": "Energy"
-    //   },
-    //   {
-    //     "intensity": 60,
-    //     "sector": "Government"
-    //   },];
-
-    //   const dat = new Map();
-    
-    //   for (const d of data) {
-    //     dat[d["sector"]] = d["intensity"] + (dat[d["sector"]] ?? 0);
-    //   }
-
-    //   console.log(dat);
-
     return reqFields;
 }
 
@@ -103,54 +74,3 @@ export const getSpecificData = async(req,res)=>{
     }
 }
 
-
-export const mostRelevance = async(req,res)=>{
-    try {
-        
-        const getdata = await jsondata.find(
-            { relevance:{ $gt:3 } }
-        )
-        
-        console.log(getdata.length)
-        res.status(200).json({
-            success: true,
-            message: "Successful ",
-            data: getdata,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Internal server error",
-        });
-    }
-};
-
-
-export const getSectorWithIntensity= async(req,res)=>{
-    try {
-        
-        const getdata = await jsondata.find(
-            { sector: "Energy" }, { intensity: 1, _id: 0 }
-        )
-        console.log(getdata.length)
-        
-        let count = 0;
-        
-        for(let i=0;i<getdata.length;i++){
-            count +=getdata[i].intensity
-        }
-        console.log(count);
-        console.log(Math.floor(count/getdata.length));
-
-        res.status(200).json({
-            success: true,
-            message: "Successful ",
-            data: getdata,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Internal server error",
-        });
-    }
-};

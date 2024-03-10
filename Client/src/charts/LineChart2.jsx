@@ -1,59 +1,92 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
-import { IoRefreshCircleOutline } from "react-icons/io5";
 
-const LineChart2 = () => {
+const LineChart2 = ({data}) => {
+    const width = 500;
+    const height = 350;
     
-    const ref = useRef();
-    const data1 = [
-        {x:1, y: 90},
-        {x: 2, y: 12},
-        {x: 3, y: 34},
-        {x: 4, y: 53},
-        {x: 5, y: 98},
-    ]
-    const createGraph = async () => {
-        let data = await d3.csv(data1)
-        
-        var margin = { top: 20, right: 20, bottom: 50, left: 70 },
-        width = 500 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
-    // append the svg object to the body of the page
-        var svg = d3.select(ref.current)
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+    const MARGIN = { top: 30, right: 30, bottom: 50, left: 50 };
 
-        // Add X axis and Y axis
-        var x = d3.scaleTime().range([0, width]);
-        var y = d3.scaleLinear().range([height, 0]);
-        x.domain(d3.extent(data, (d) => { return d.x; }));
-        y.domain([0, d3.max(data, (d) => { return d.y; })]);
-        svg.append("g")
-        .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x));
-        svg.append("g")
-        .call(d3.axisLeft(y));
+    const axesRef = useRef(null);
+    const boundsWidth = width - MARGIN.right - MARGIN.left;
+    const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
-        var valueLine = d3.line()
-            .x((d) => { return x(d.x); })
-            .y((d) => { return y(d.y); });
+    // Y axis
+    const [min, max] = d3.extent(data, (d) => d.v);
+    const yScale = d3
+        .scaleLinear()
+        .domain([0, (max + 50) || 0])
+        .range([boundsHeight, 0]);
 
-        svg.append("path")
-        .data([data])
-        .attr("class", "line")
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-width", 1.5)
-        .attr("d", x)
-    }
+    // X axis
+    const [xMin, xMax] = d3.extent(data, (d) => d.likelihood);
+    const xScale = d3
+        .scaleLinear()
+        .domain([0, (xMax + 0.5) || 0])
+        .range([0, boundsWidth]);
 
     useEffect(() => {
-        createGraph();
-    }, []);
+        const svgElement = d3.select(axesRef.current);
+        svgElement.selectAll('*').remove();
+        const xAxisGenerator = d3.axisBottom(xScale).ticks(5); ;
+        svgElement
+        .append('g')
+        .attr('transform', 'translate(0, ' + boundsHeight + ')')
+        .call(xAxisGenerator);
 
-    return <svg width={500} height={300} id="line"  ref={ref}/>
-}
+        const yAxisGenerator = d3.axisLeft(yScale) ;
+        svgElement.append('g').call(yAxisGenerator);
+    }, [xScale, yScale, boundsHeight]);
+
+    // Build the line
+    const lineBuilder = d3
+        .line(width,height)
+        .x((d) => xScale(d.likelihood))
+        .y((d) => yScale(d.v));
+    const linePath = lineBuilder(data);
+    if (!linePath) {
+        return null;
+    }
+
+    // Build the circles
+    const allCircles = data.map((item, i) => {
+        return (
+        <circle
+            key={i}
+            cx={xScale(item.likelihood)}
+            cy={yScale(item.v)}
+            r={4}
+            fill={'rgb(129 140 248 /1)'}
+        />
+        );
+    });
+
+    return (
+        <div>
+        <svg width={width} height={height}>
+            <g
+            width={boundsWidth}
+            height={boundsHeight}
+            transform={`translate(${[MARGIN.left, MARGIN.top].join(',')})`}
+            >
+            <path
+                d={linePath}
+                opacity={0.3}
+                stroke="rgb(85 70 229/1)"
+                fill="none"
+                strokeWidth={3}
+            />
+            {allCircles}
+            </g>
+            <g
+            width={boundsWidth}
+            height={boundsHeight}
+            ref={axesRef}
+            transform={`translate(${[MARGIN.left, MARGIN.top].join(',')})`}
+            />
+        </svg>
+        </div>
+    );
+};
 
 export default LineChart2

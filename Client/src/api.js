@@ -19,7 +19,7 @@ export const getMostLiked = async(req,res)=>{
 
 export const getdata = async (query)=>{
     try {
-        const data = await api.get(`/getspecificdata${query}`,{
+        const data = await api.get(`/getspecificdata${query?query:""}`,{
             timeout:10*1000
         })
         return data.data.data;

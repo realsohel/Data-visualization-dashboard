@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 
 const Barchart = ({data1}) => {
     const ref = useRef();
-    // const [h, setH] = useState(100);
 
     useEffect(() => {
         const max = Math.max(...data1.map(d => d.intensity));

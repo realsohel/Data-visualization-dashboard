@@ -30,7 +30,8 @@ const VisualCard = () => {
     
     return (
         <div className=' border-2 bg-white rounded-md shadow-md mx-4 hover:shadow-lg'>
-            <h1 className='m-8 text-center text-2xl font-bold '>Mean Intensity among different sectors</h1>
+            <h1 className='mt-8 text-center text-2xl font-bold '>Mean Intensity among different sectors</h1>
+            <h2 className='secondaryText text-center'>For eg. The Mean intensity of the Energy sector is around 9</h2>
             <Barchart data1={vals}/>
         </div>
     )
