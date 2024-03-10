@@ -6,8 +6,7 @@ import RingLoader from "react-spinners/RingLoader";
 const MostLiked = () => {
   const [liked,setLiked] = useState([]);
   const[loading,setLoading] = useState(false)
-  
-  
+    
   useEffect(()=>{
     const getLiked= async()=>{
       setLoading(true)
